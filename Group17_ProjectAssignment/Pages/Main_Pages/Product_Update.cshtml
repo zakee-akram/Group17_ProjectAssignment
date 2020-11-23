@@ -1,0 +1,41 @@
+﻿@page
+@model Group17_ProjectAssignment.Pages.Main_Pages.Product_UpdateModel
+@{
+}
+<h1> Update Product Page</h1>
+
+<div class="row">
+    <div class="col-md-4">
+        <form method="post">
+
+            <input type="hidden" asp-for="Product.SerialNumber" />
+
+
+            <div class="form-group">
+                <label asp-for="Product.SerialNumber" class="control-label"></label>
+                <input type="text" asp-for="Product.SerialNumber" class="form-control" />
+            </div>
+            <div class="form-group">
+                <label asp-for="Product.Name" class="control-label"></label>
+                <input type="text" asp-for="Product.Name" class="form-control" />
+            </div>
+            <div class="form-group">
+                <label asp-for="Product.Company" class="control-label"></label>
+                <input type="text" asp-for="Product.Company" class="form-control" />
+            </div>
+            <div class="form-group">
+                <label asp-for="Product.SalePrice" class="control-label"></label>
+                <input type="text" asp-for="Product.SalePrice" class="form-control" />
+            </div>
+            <div class="form-group">
+                <label asp-for="Product.Category" class="control-label"></label>
+                <input type="text" asp-for="Product.Category" class="form-control" />
+            </div>
+            <div>
+                <input type="submit" value="Update" class="btn btn-secondary" />
+            </div>
+
+
+        </form>
+    </div>
+</div>

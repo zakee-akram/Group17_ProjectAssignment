@@ -41,6 +41,9 @@
                 <th>
                     @Html.DisplayNameFor(model => model.Products[4].Category)
                 </th>
+                <th>
+                    Actions
+                </th>
 
 
             </tr>
@@ -55,6 +58,11 @@
         <td>@Model.Products[i].Company</td>
         <td>@Model.Products[i].SalePrice</td>
         <td>@Model.Products[i].Category</td>
+
+        <td>
+            <a asp-page="/Main_Pages/Product_Update" asp-route-id="@Model.Products[i].SerialNumber">Update</a>
+            <a asp-page="/Main_Pages/Product_Delete" asp-route-id="@Model.Products[i].SerialNumber">Delete</a>
+        </td>
 
     </tr>
         }
