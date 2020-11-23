@@ -4,6 +4,25 @@
 }
 
 <div>
+    <p>Select Category</p>
+    <form>
+        <select type="text" asp-for="Category" style="width: 50%;">
+            <option>All</option>
+            @foreach(var item in Model.Categories)
+            {
+                <option>@item</option>
+            }
+        </select>
+        <input type="submit" value="Filter"/>
+    </form>
+
+</div>
+<br />
+
+
+
+
+<div>
     <table class="table table-active">
         <thead>
             <tr>

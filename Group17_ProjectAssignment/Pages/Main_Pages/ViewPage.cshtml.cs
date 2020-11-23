@@ -12,6 +12,11 @@ namespace Group17_ProjectAssignment.Pages.Main_Pages
     public class ViewPageModel : PageModel
     {
         public List<ProductModel> Products { get; set; }
+        
+        [BindProperty(SupportsGet = true)]
+        public string Category { get; set; }
+        public List<string> Categories { get; set; } = new List<string> { "GraphicsCard","Cpu","PowerSupply","Motherboard","Ram" };
+
 
         public void OnGet()
         {
@@ -21,7 +26,14 @@ namespace Group17_ProjectAssignment.Pages.Main_Pages
             using (SqlCommand command = new SqlCommand())
             {
                 command.Connection = conn;
-                command.CommandText = @"SELECT * from Products "; SqlDataReader reader = command.ExecuteReader(); //SqlDataReader is used to read record from a table
+                command.CommandText = @"SELECT * from Products ";
+                if (!string.IsNullOrEmpty(Category))
+                {
+                    command.CommandText += " WHERE Category = @Cat";
+                    command.Parameters.AddWithValue("@Cat", Convert.ToString(Category));
+                }
+
+                SqlDataReader reader = command.ExecuteReader(); //SqlDataReader is used to read record from a table
 
                 Products = new List<ProductModel>(); //this object of list is created to populate all records from the table
 
