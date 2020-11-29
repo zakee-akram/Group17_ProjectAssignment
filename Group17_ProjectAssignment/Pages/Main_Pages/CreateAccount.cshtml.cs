@@ -9,11 +9,11 @@ using System.Data.SqlClient;
 
 namespace Group17_ProjectAssignment.Pages.Main_Pages
 {
-    public class Product_RegistrationModel : PageModel
+    public class CreateAccountModel : PageModel
     {
         [BindProperty]
         //links variable to models
-        public ProductModel Products { get; set; }
+        public UsersModel Users { get; set; }
         public void OnGet()
         {
         }
@@ -31,21 +31,20 @@ namespace Group17_ProjectAssignment.Pages.Main_Pages
             using (SqlCommand command = new SqlCommand())
             {
                 command.Connection = conn;
-                command.CommandText = @"INSERT INTO Products (SerialNumber, Name, Company, SalePrice, Category) VALUES (@SNum,@Name,@Con,@SPri,@Cat)";
-                command.Parameters.AddWithValue("@SNum", Products.SerialNumber);
-                command.Parameters.AddWithValue("@Name", Products.Name);
-                command.Parameters.AddWithValue("@Con", Products.Company);
-                command.Parameters.AddWithValue("@SPri", Products.SalePrice);
-                command.Parameters.AddWithValue("@Cat", Products.Category);
-                Console.WriteLine(Products.SerialNumber);
-                Console.WriteLine(Products.Name);
-                Console.WriteLine(Products.Company);
-                Console.WriteLine(Products.SalePrice);
-                Console.WriteLine(Products.Category);
+                command.CommandText = @"INSERT INTO User (FirstName, SecondName, Password, Role) VALUES (@FNam,@SNam,@Pass,@Role)";
+                command.Parameters.AddWithValue("@FNam", Users.FirstName);
+                command.Parameters.AddWithValue("@SNam", Users.SecondName);
+                command.Parameters.AddWithValue("@Pass", Users.Password);
+                command.Parameters.AddWithValue("@Role", Users.Role);
+                Console.WriteLine(Users.FirstName);
+                Console.WriteLine(Users.SecondName);
+                Console.WriteLine(Users.Password);
+                Console.WriteLine(Users.Role);
                 command.ExecuteNonQuery();
 
             }
             return RedirectToPage("/Index");
         }
     }
+        
 }

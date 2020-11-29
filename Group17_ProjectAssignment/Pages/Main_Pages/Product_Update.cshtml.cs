@@ -53,7 +53,9 @@ namespace Group17_ProjectAssignment.Pages.Main_Pages
         }
         public IActionResult OnPost()
         {
-            string ConnectionString = @"Data Source=(localdb)\MSSQLLocalDB;Initial Catalog=ComputerShop;Integrated Security=True;Connect Timeout=30;Encrypt=False;TrustServerCertificate=False;ApplicationIntent=ReadWrite;MultiSubnetFailover=False";
+            DBString dB = new DBString();
+            string ConnectionString = dB.ConString();
+            //string ConnectionString = @"Data Source=(localdb)\MSSQLLocalDB;Initial Catalog=ComputerShop;Integrated Security=True;Connect Timeout=30;Encrypt=False;TrustServerCertificate=False;ApplicationIntent=ReadWrite;MultiSubnetFailover=False";
 
             SqlConnection conn = new SqlConnection(ConnectionString);
             conn.Open();

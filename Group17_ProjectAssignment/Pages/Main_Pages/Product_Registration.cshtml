@@ -12,22 +12,26 @@
             <div class="form-group">
                 <label class="control-label">Serial Number</label>
                 <input type="text" asp-for="Products.SerialNumber" class="form-control" />
+                <span asp-validation-for="Products.SerialNumber" class="text-danger"></span>
             </div>
             <br />
             <div class="form-group">
                 <label class="control-label">Name</label>
                 <input type="text" asp-for="Products.Name" class="form-control" />
+                <span asp-validation-for="Products.Name" class="text-danger"></span>
             </div>
             <div class="form-group">
                 <label class="control-label">Company</label>
                 <input type="text" asp-for="Products.Company" class="form-control" />
+                <span asp-validation-for="Products.Company" class="text-danger"></span>
             </div>
             <div class="form-group">
                 <label class="control-label">SalePrice</label>
                 <input type="text" asp-for="Products.SalePrice" class="form-control" />
+                <span asp-validation-for="Products.SalePrice" class="text-danger"></span>
             </div>
 
-            <div class="form-inline">
+            <div class="form-inline" >
                 <label class="control-label" for="GraphicsCard">Graphics Card</label>
                 <input type="radio" id="GraphicsCard" value="GraphicsCard" asp-for="Products.Category" class="form-control" />
 
@@ -45,9 +49,12 @@
 
                 <label class="control-label" for="Ram">Ram </label>
                 <input type="radio" id="Ram" value="Ram" asp-for="Products.Category" class="form-control" />
+
             </div>
             <div>
                 <input type="submit" value="Create" class="btn btn-secondary" />
+                <span asp-validation-for="Products.Category" class="text-danger"></span>
+
             </div>
         </form>
     </div>
