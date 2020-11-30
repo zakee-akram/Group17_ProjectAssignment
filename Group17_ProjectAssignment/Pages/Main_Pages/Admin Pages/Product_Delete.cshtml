@@ -1,0 +1,45 @@
+﻿@page
+@model Group17_ProjectAssignment.Pages.Main_Pages.Product_DeleteModel
+@{
+}
+
+
+<h1> Delete Product:</h1>
+
+<h2 class="text-danger">Are you sure want to delete the record?</h2>
+
+<div class="table-active">
+    <div>
+        <label asp-for="Product.SerialNumber"></label>
+        <span> : </span>
+        @Model.Product.SerialNumber
+    </div>
+    <div>
+        <label asp-for="Product.Name"></label>
+        <span> : </span>
+        @Model.Product.Name
+    </div>
+    <div>
+        <label asp-for="Product.Company"></label>
+        <span> : </span>
+        @Model.Product.Company
+    </div>
+    <div>
+        <label asp-for="Product.SalePrice"></label>
+        <span> : </span>
+        @Model.Product.SalePrice
+    </div>
+    <div>
+        <label asp-for="Product.Category"></label>
+        <span> : </span>
+        @Model.Product.Category
+    </div>
+</div>
+
+<br />
+<div>
+    <form method="post">
+        <input type="hidden" asp-for="Product.SerialNumber" />
+        <input type="submit" value="Delete" class="btn btn-danger" />
+    </form>
+</div>

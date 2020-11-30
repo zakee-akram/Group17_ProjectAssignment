@@ -24,6 +24,14 @@ namespace Group17_ProjectAssignment
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddRazorPages();
+
+            services.AddSession(o => {
+                o.IdleTimeout = TimeSpan.FromSeconds(60);//change 120 to any timespan
+                o.Cookie.HttpOnly = true;
+                o.Cookie.IsEssential = true;
+
+            });
+
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -32,7 +40,7 @@ namespace Group17_ProjectAssignment
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();
-            }
+            }   
             else
             {
                 app.UseExceptionHandler("/Error");
@@ -46,6 +54,8 @@ namespace Group17_ProjectAssignment
             app.UseRouting();
 
             app.UseAuthorization();
+
+            app.UseSession();
 
             app.UseEndpoints(endpoints =>
             {

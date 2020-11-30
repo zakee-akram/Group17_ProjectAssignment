@@ -1,0 +1,70 @@
+﻿@page
+@model Group17_ProjectAssignment.Pages.Main_Pages.ViewPageModel
+@{
+}
+
+<div>
+    <p>Select Category</p>
+    <form>
+        <select type="text" asp-for="Category" style="width: 50%;">
+            <option>All</option>
+            @foreach(var item in Model.Categories)
+            {
+                <option>@item</option>
+            }
+        </select>
+        <input type="submit" value="Filter"/>
+    </form>
+
+</div>
+<br />
+
+
+
+
+<div>
+    <table class="table table-active">
+        <thead>
+            <tr>
+                <th>
+                    @Html.DisplayNameFor(model => model.Products[0].SerialNumber)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Products[1].Name)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Products[2].Company)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Products[3].SalePrice)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Products[4].Category)
+                </th>
+                <th>
+                    Actions
+                </th>
+
+
+            </tr>
+        </thead>
+
+
+        @for (int i = 0; i < Model.Products.Count; i++)
+        {
+    <tr>
+        <td>@Model.Products[i].SerialNumber</td>
+        <td>@Model.Products[i].Name</td>
+        <td>@Model.Products[i].Company</td>
+        <td>@Model.Products[i].SalePrice</td>
+        <td>@Model.Products[i].Category</td>
+
+        <td>
+            <a asp-page="/Main_Pages/Admin Pages/Product_Update" asp-route-id="@Model.Products[i].SerialNumber">Update</a>
+            <a asp-page="/Main_Pages/Admin Pages/Product_Delete" asp-route-id="@Model.Products[i].SerialNumber">Delete</a>
+        </td>
+
+    </tr>
+        }
+    </table>
+</div>

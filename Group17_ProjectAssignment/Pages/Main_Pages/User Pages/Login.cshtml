@@ -1,0 +1,31 @@
+﻿@page
+@model Group17_ProjectAssignment.Pages.Main_Pages.LoginModel
+@{
+}
+
+
+
+<div class="row">
+    <div class="col-md-4">
+        <form method="post">
+            <div class="form-group">
+                <label class="control-label">Login</label>
+                <input type="text" asp-for="user.UserName" class="form-control" />
+            </div>
+            <div class="form-group">
+                <label asp-for="user.Password" class="control-label">Password</label>
+                <input asp-for="user.Password" type="password" class="form-control" />
+            </div>
+            <div>
+                <input type="submit" value="Login" class="btn btn-dark" />
+            </div>
+
+        </form>
+
+        <p style="text-decoration: underline;"><a asp-page="/Main_Pages/User Pages/CreateAccount">Create Account</a></p>
+
+        <div>
+            <p style="color: red">@Model.message</p>
+        </div>
+    </div>
+</div>
