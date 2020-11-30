@@ -9,7 +9,7 @@ namespace Group17_ProjectAssignment
     {
         public string ConString ()
         {
-            string ConString = @"Data Source=(localdb)\MSSQLLocalDB;Initial Catalog=ComputerShop;Integrated Security=True;Connect Timeout=30;Encrypt=False;TrustServerCertificate=False;ApplicationIntent=ReadWrite;MultiSubnetFailover=False";
+            string ConString = @"Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename=C:\Users\Zakee\Documents\Projects\ASP.NET\Assignment\One\DatabaseCon\Data\ComputerShop.mdf;Integrated Security=True;Connect Timeout=30";
 
             return ConString;
         }

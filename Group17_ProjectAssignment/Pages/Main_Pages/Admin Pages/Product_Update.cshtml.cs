@@ -15,8 +15,8 @@ namespace Group17_ProjectAssignment.Pages.Main_Pages
         public ProductModel Product { get; set; }
         public IActionResult OnGet(int? id)
         {
-            string ConnectionString = @"Data Source=(localdb)\MSSQLLocalDB;Initial Catalog=ComputerShop;Integrated Security=True;Connect Timeout=30;Encrypt=False;TrustServerCertificate=False;ApplicationIntent=ReadWrite;MultiSubnetFailover=False";
-
+            DBString dB = new DBString();
+            string ConnectionString = dB.ConString();
             SqlConnection conn = new SqlConnection(ConnectionString);
             conn.Open();
 

@@ -11,6 +11,9 @@ namespace Group17_ProjectAssignment.Model
         [Required]
         [Display(Name = "FirstName")]
         public string FirstName { get; set; }
+        [Required]
+        [Display(Name = "UserName")]
+        public string UserName { get; set; }
 
         [Required]
         [Display(Name = "SecondName")]
