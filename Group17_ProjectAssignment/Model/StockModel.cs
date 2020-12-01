@@ -10,13 +10,13 @@ namespace Group17_ProjectAssignment.Model
     { //For Table Stock
         [Required]
         [Display(Name = "StockIdNumber")]
-        public string StockIdNumber { get; set; }
+        public int StockIdNumber { get; set; }
         [Required]
         [Display(Name = "SerialIdNumber")]
         public string SerialIdNumber { get; set; }
         [Required]
         [Display(Name = "PurchasePrice")]
-        public string PurchasePrice { get; set; }
+        public int PurchasePrice { get; set; }
         [Required]
         [Display(Name = "Amount")]
         public int Amount { get; set; }

@@ -8,18 +8,16 @@
     <form>
         <select type="text" asp-for="Category" style="width: 50%;">
             <option>All</option>
-            @foreach(var item in Model.Categories)
+            @foreach (var item in Model.Categories)
             {
                 <option>@item</option>
             }
         </select>
-        <input type="submit" value="Filter"/>
+        <input type="submit" value="Filter" />
     </form>
 
 </div>
 <br />
-
-
 
 
 <div>
@@ -42,6 +40,15 @@
                     @Html.DisplayNameFor(model => model.Products[4].Category)
                 </th>
                 <th>
+                    @Html.DisplayNameFor(model => model.Stock[0].StockIdNumber)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Stock[1].PurchasePrice)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Stock[2].Amount)
+                </th>
+                <th>
                     Actions
                 </th>
 
@@ -58,14 +65,61 @@
         <td>@Model.Products[i].Company</td>
         <td>@Model.Products[i].SalePrice</td>
         <td>@Model.Products[i].Category</td>
+             
+            @if (!(String.IsNullOrEmpty(Model.Stock[i].SerialIdNumber) && Model.Stock[i].SerialIdNumber == Model.Products[i].SerialNumber))
+            {
+                <td>@Model.Stock[i].StockIdNumber</td>
+             //   <td>@Model.Stock[i].SerialIdNumber</td>
+                <td>@Model.Stock[i].PurchasePrice</td>
+                <td>@Model.Stock[i].Amount</td>
+            }     
+        
+        }
+        }
 
         <td>
             <a asp-page="/Main_Pages/Admin Pages/Product_Update" asp-route-id="@Model.Products[i].SerialNumber">Update</a>
             <a asp-page="/Main_Pages/Admin Pages/Product_Delete" asp-route-id="@Model.Products[i].SerialNumber">Delete</a>
             <a asp-page="/Main_Pages/Admin Pages/Adding_Stock" asp-route-id="@Model.Products[i].SerialNumber">Add</a>
         </td>
-
     </tr>
         }
+
     </table>
 </div>
+
+
+@*@for (int x = 0; i < Model.Stock.Count; i++)
+    {
+        <td>@Model.Stock[x].StockIdNumber</td>
+        <td>@Model.Stock[x].SerialIdNumber</td>
+        <td>@Model.Stock[x].PurchasePrice</td>
+        <td>@Model.Stock[x].Amount</td>
+    }*@
+
+
+@*@for (int i = 0; i < Model.Products.Count; i++)
+{
+    <tr>
+        <td>@Model.Products[i].SerialNumber</td>
+        <td>@Model.Products[i].Name</td>
+        <td>@Model.Products[i].Company</td>
+        <td>@Model.Products[i].SalePrice</td>
+        <td>@Model.Products[i].Category</td>
+        @for (int x = 0; x < Model.Stock.Count; i++)
+        {
+                           @if (!string.IsNullOrEmpty(Model.Stock[x].StockIdNumber.ToString()&&){
+
+        }
+               
+                    
+            
+              
+
+        <td>
+            <a asp-page="/Main_Pages/Admin Pages/Product_Update" asp-route-id="@Model.Products[i].SerialNumber">Update</a>
+            <a asp-page="/Main_Pages/Admin Pages/Product_Delete" asp-route-id="@Model.Products[i].SerialNumber">Delete</a>
+            <a asp-page="/Main_Pages/Admin Pages/Adding_Stock" asp-route-id="@Model.Products[i].SerialNumber">Add</a>
+        </t*@<!--d>-->
+    @*</tr>
+}*@

@@ -12,10 +12,12 @@ namespace Group17_ProjectAssignment.Pages.Main_Pages
     public class ViewPageModel : PageModel
     {
         public List<ProductModel> Products { get; set; }
-        
+        public List<StockModel> Stock { get; set; }
+
+
         [BindProperty(SupportsGet = true)]
         public string Category { get; set; }
-        public List<string> Categories { get; set; } = new List<string> { "GraphicsCard","Cpu","PowerSupply","Motherboard","Ram" };
+        public List<string> Categories { get; set; } = new List<string> { "GraphicsCard", "Cpu", "PowerSupply", "Motherboard", "Ram" };
 
 
         public void OnGet()
@@ -28,7 +30,7 @@ namespace Group17_ProjectAssignment.Pages.Main_Pages
             using (SqlCommand command = new SqlCommand())
             {
                 command.Connection = conn;
-                command.CommandText = @"SELECT * from Products ";
+                command.CommandText = @"SELECT * From Products ";
                 if (!string.IsNullOrEmpty(Category))
                 {
                     command.CommandText += " WHERE Category = @Cat";
@@ -36,6 +38,7 @@ namespace Group17_ProjectAssignment.Pages.Main_Pages
                 }
 
                 SqlDataReader reader = command.ExecuteReader(); //SqlDataReader is used to read record from a table
+                command.CommandText = @"SELECT * FROM Products UNION SELECT * FROM Stock ";
 
                 Products = new List<ProductModel>(); //this object of list is created to populate all records from the table
 
@@ -50,12 +53,40 @@ namespace Group17_ProjectAssignment.Pages.Main_Pages
 
                     Products.Add(record); //adding the single record into the list
                 }
+                reader.Close();
+            }
+
+
+            SqlConnection connn = new SqlConnection(ConnectionString);
+            connn.Open();
+            using (SqlCommand command = new SqlCommand())
+            {
+                command.Connection = conn;
+                command.CommandText = @"SELECT * from Stock ";
+
+
+                SqlDataReader reader = command.ExecuteReader(); //SqlDataReader is used to read record from a table
+
+                Stock = new List<StockModel>(); //this object of list is created to populate all records from the table
+
+                while (reader.Read())
+                {
+                    StockModel record = new StockModel(); //a local var to hold a record temporarily
+                    record.StockIdNumber = reader.GetInt32(0); //getting the first field from the table
+                    record.SerialIdNumber = reader.GetString(1); //getting the second field from the table
+                    record.PurchasePrice = reader.GetInt32(2); //getting the third field from the table
+                    record.Amount = reader.GetInt32(3);
+
+                    Stock.Add(record); //adding the single record into the list
+                }
 
                 // Call Close when done reading.
                 reader.Close();
 
-
             }
         }
     }
+
+
 }
+

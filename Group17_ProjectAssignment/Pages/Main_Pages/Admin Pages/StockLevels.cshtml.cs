@@ -34,9 +34,9 @@ namespace Group17_ProjectAssignment.Pages.Main_Pages.Admin_Pages
                 while (reader.Read())
                 {
                     StockModel record = new StockModel(); //a local var to hold a record temporarily
-                    record.StockIdNumber = reader.GetString(0); //getting the first field from the table
+                    record.StockIdNumber = reader.GetInt32(0); //getting the first field from the table
                     record.SerialIdNumber = reader.GetString(1); //getting the second field from the table
-                    record.PurchasePrice = reader.GetString(2); //getting the third field from the table
+                    record.PurchasePrice = reader.GetInt32(2); //getting the third field from the table
                     record.Amount = reader.GetInt32(3);
 
                     Stock.Add(record); //adding the single record into the list
