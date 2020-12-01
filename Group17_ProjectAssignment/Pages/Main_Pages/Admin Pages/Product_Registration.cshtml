@@ -15,6 +15,7 @@
                 <span asp-validation-for="Products.SerialNumber" class="text-danger"></span>
             </div>
             <br />
+
             <div class="form-group">
                 <label class="control-label">Name</label>
                 <input type="text" asp-for="Products.Name" class="form-control" />
@@ -30,28 +31,41 @@
                 <input type="text" asp-for="Products.SalePrice" class="form-control" />
                 <span asp-validation-for="Products.SalePrice" class="text-danger"></span>
             </div>
-
-
-            <div class="form-inline" >
+            <div class="form-inline">
                 <label class="control-label" for="GraphicsCard">Graphics Card</label>
                 <input type="radio" id="GraphicsCard" value="GraphicsCard" asp-for="Products.Category" class="form-control" />
-
                 <label class="control-label" for="Cpu">Cpu</label>
                 <input type="radio" id="Cpu" value="Cpu" asp-for="Products.Category" class="form-control" />
-
-
                 <label class="control-label" for="PowerSupply">PowerSupply</label>
                 <input type="radio" id="PowerSupply" value="PowerSupply" asp-for="Products.Category" class="form-control" />
-
-
                 <label class="control-label" for="Motherboard">Motherboard</label>
                 <input type="radio" id="Motherboard" value="Motherboard" asp-for="Products.Category" class="form-control" />
-
-
                 <label class="control-label" for="Ram">Ram </label>
                 <input type="radio" id="Ram" value="Ram" asp-for="Products.Category" class="form-control" />
-
             </div>
+
+
+            <div class="form-group">
+                <label class="control-label">Stock Id Number</label>
+                <input type="text" asp-for="Stock.StockIdNumber" class="form-control" />
+                <span asp-validation-for="Stock.StockIdNumber" class="text-danger"></span>
+            </div>
+
+            <div class="form-group">
+                <label class="control-label">Purchase Price</label>
+                <input type="text" asp-for="Stock.PurchasePrice" class="form-control" />
+                <span asp-validation-for="Stock.PurchasePrice" class="text-danger"></span>
+            </div>
+
+
+
+            <div class="form-group">
+                <label class="control-label">Amount</label>
+                <input type="text" asp-for="Stock.Amount" class="form-control" />
+                <span asp-validation-for="Stock.Amount" class="text-danger"></span>
+            </div>
+
+
             <div>
                 <input type="submit" value="Create" class="btn btn-secondary" />
                 <span asp-validation-for="Products.Category" class="text-danger"></span>

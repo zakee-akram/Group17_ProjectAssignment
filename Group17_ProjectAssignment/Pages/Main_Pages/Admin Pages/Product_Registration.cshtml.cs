@@ -12,9 +12,13 @@ namespace Group17_ProjectAssignment.Pages.Main_Pages
 {
     public class Product_RegistrationModel : PageModel
     {
+        
         [BindProperty]
         //links variable to models
         public ProductModel Products { get; set; }
+        [BindProperty]
+
+        public StockModel Stock { get; set; }
       
         public string UserName;
         public const string Session1 = "username";
@@ -29,7 +33,6 @@ namespace Group17_ProjectAssignment.Pages.Main_Pages
 
         public string Role;
         public const string Session4 = "Role";
-        public string msg;
 
 
         public IActionResult OnGet()
@@ -50,10 +53,7 @@ namespace Group17_ProjectAssignment.Pages.Main_Pages
 
         public IActionResult OnPost()
         {
-            if (!ModelState.IsValid)
-            {
-                return Page();
-            }
+          
 
             DBString dB = new DBString();
             string ConnectionString = dB.ConString();
@@ -71,8 +71,18 @@ namespace Group17_ProjectAssignment.Pages.Main_Pages
                 Console.WriteLine(Products.SerialNumber);
                 Console.WriteLine(Products.Name);
                 Console.WriteLine(Products.Company);
-                Console.WriteLine(Products.SalePrice);
                 Console.WriteLine(Products.Category);
+                command.ExecuteNonQuery();
+                command.Parameters.Clear();
+                command.CommandText = @"INSERT INTO Stock (StockIdNumber, SerialNumber, PurchasePrice, Amount) VALUES (@Sidn,@Sedn,@Ppri,@Amnt)";
+                command.Parameters.AddWithValue("@Sidn", Stock.StockIdNumber);
+                command.Parameters.AddWithValue("@Sedn", Products.SerialNumber);
+                command.Parameters.AddWithValue("@Ppri", Stock.PurchasePrice);
+                command.Parameters.AddWithValue("@Amnt", Stock.Amount);
+                Console.WriteLine(Stock.StockIdNumber);
+                Console.WriteLine(Products.SerialNumber);
+                Console.WriteLine(Stock.PurchasePrice);
+                Console.WriteLine(Stock.Amount);
                 command.ExecuteNonQuery();
 
             }

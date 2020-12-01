@@ -13,7 +13,36 @@ namespace Group17_ProjectAssignment.Pages.Main_Pages.Admin_Pages
 {
     public class ImageUploadModel : PageModel
     {
+        public string UserName;
+        public const string Session1 = "username";
 
+
+        public string FirstName;
+        public const string Session2 = "fname";
+
+        public string sessionId;
+        public const string Session3 = "sessionId";
+
+
+        public string Role;
+        public const string Session4 = "Role";
+
+
+        public IActionResult OnGet()
+        {
+            UserName = HttpContext.Session.GetString(Session1);
+            FirstName = HttpContext.Session.GetString(Session2);
+            sessionId = HttpContext.Session.GetString(Session3);
+            Role = HttpContext.Session.GetString(Session4);
+
+            if (string.IsNullOrEmpty(UserName) | string.IsNullOrEmpty(FirstName) | string.IsNullOrEmpty(sessionId))
+            {
+
+                return RedirectToPage("/Main_Pages/User Pages/Login");
+            }
+            return Page();
+
+        }
 
         [BindProperty]
         public IFormFile imgUpload { get; set; }
@@ -41,9 +70,6 @@ namespace Group17_ProjectAssignment.Pages.Main_Pages.Admin_Pages
         }
 
 
-        public void OnGet()
-        {
-
-        }
+       
     }
 }

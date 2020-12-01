@@ -24,10 +24,6 @@ namespace Group17_ProjectAssignment.Model
         [Required]
         [Display(Name = "Category")]
         public string Category { get; set; }
-        //For Table Stock
-        public string StockIdNumber { get; set; }
-        public string SerialIdNumber { get; set; }
-        public string PurchasePrice { get; set; }
-        public string Amount { get; set; }
+       
     }
 }
