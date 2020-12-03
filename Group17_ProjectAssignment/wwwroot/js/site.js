@@ -12,3 +12,9 @@ function readURL(input) {
     };
     reader.readAsDataURL(input.files[0]);
 }
+
+$(document).ready(function () {
+    $('[data-toggle="tooltip"]').tooltip({
+        html: true
+    });
+});

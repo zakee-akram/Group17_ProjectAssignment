@@ -49,7 +49,7 @@ namespace Group17_ProjectAssignment.Pages.Main_Pages
                 HttpContext.Session.SetString("fname", user.FirstName);
                 HttpContext.Session.SetString("Role", user.Role);
 
-                if (user.Role == "User")
+                if (user.Role == "Employee")
                 {
                     return RedirectToPage("/Main_Pages/User Pages/WelcomeUser");
                 }

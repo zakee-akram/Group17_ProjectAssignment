@@ -22,15 +22,23 @@ namespace Group17_ProjectAssignment.Pages.Main_Pages
         public string sessionId;
         public const string Session3 = "sessionId";
 
+        public string Role;
+        public const string Session4 = "Role";
+
         public IActionResult OnGet()
         {
             UserName = HttpContext.Session.GetString(Session1);
             FirstName = HttpContext.Session.GetString(Session2);
             sessionId = HttpContext.Session.GetString(Session3);
-
+            Role = HttpContext.Session.GetString(Session4);
             if (string.IsNullOrEmpty(UserName) && string.IsNullOrEmpty(FirstName) && string.IsNullOrEmpty(sessionId))
             {
                 return RedirectToPage("/Main_Pages/User Pages/Login");
+            }
+
+            if (Role == "Admin")
+            {
+                return RedirectToPage("/Main_Pages/Admin Pages/WelcomeAdmin");
             }
             return Page();
 

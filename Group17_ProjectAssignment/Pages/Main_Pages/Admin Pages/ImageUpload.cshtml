@@ -4,6 +4,32 @@
 }
 <h1>Upload Files Page</h1>
 <br />
+<input type="hidden" value="@Model.Products.SerialNumber" name="id" />
+
+
+<div class="table-active">
+    <div>
+        <label asp-for="Products.SerialNumber"></label>
+        <span> : </span>
+        @Model.Products.SerialNumber
+    </div>
+    <div>
+        <label asp-for="Products.Name"></label>
+        <span> : </span>
+        @Model.Products.Name
+    </div>
+    <div>
+        <label asp-for="Stock.StockIdNumber"></label>
+        <span> : </span>
+        @Model.Stock.StockIdNumber
+    </div>
+    <div>
+        <label asp-for="Stock.Amount"></label>
+        <span> : </span>
+        @Model.Stock.Amount
+    </div>
+
+</div>
 
 <div>
     <form method="post" enctype="multipart/form-data">
@@ -13,11 +39,14 @@
             <input type="file" asp-for="imgUpload" onchange="readURL(this)" accept="image/*" />
         </div>
         <br />
+
         <div>
             <input type="submit" value="Upload" class="btn btn-primary" />
         </div>
     </form>
 </div>
+
+
 
 <br />
 <div>

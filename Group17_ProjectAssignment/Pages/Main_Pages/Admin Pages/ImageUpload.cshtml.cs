@@ -8,11 +8,20 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Group17_ProjectAssignment.Model;
 using System.IO;
+using System.Data.SqlClient;
 
 namespace Group17_ProjectAssignment.Pages.Main_Pages.Admin_Pages
 {
     public class ImageUploadModel : PageModel
     {
+        [BindProperty]
+        public ImageModel imgDetail { get; set; }
+        [BindProperty]
+
+        public ProductModel Products { get; set; }
+        public StockModel Stock { get; set; }
+
+
         public string UserName;
         public const string Session1 = "username";
 
@@ -27,9 +36,14 @@ namespace Group17_ProjectAssignment.Pages.Main_Pages.Admin_Pages
         public string Role;
         public const string Session4 = "Role";
 
-
-        public IActionResult OnGet()
+        protected void btnInsert(object sender, EventArgs e)
         {
+
+        }
+
+        public IActionResult OnGet(int? id)
+        {
+         
             UserName = HttpContext.Session.GetString(Session1);
             FirstName = HttpContext.Session.GetString(Session2);
             sessionId = HttpContext.Session.GetString(Session3);
@@ -40,9 +54,51 @@ namespace Group17_ProjectAssignment.Pages.Main_Pages.Admin_Pages
 
                 return RedirectToPage("/Main_Pages/User Pages/Login");
             }
-            return Page();
 
+
+            DBString dB = new DBString();
+            string ConnectionString = dB.ConString();
+            SqlConnection conn = new SqlConnection(ConnectionString);
+            conn.Open();
+            using (SqlCommand command = new SqlCommand())
+            {
+                command.Connection = conn;
+                command.CommandText = @"SELECT * from Products WHERE SerialNumber =@SNum";
+
+                command.Parameters.AddWithValue("@SNum", id);
+                Console.WriteLine("@The SerialNumber " + id);
+
+                Products = new ProductModel();
+                SqlDataReader reader = command.ExecuteReader();
+                while (reader.Read())
+                {
+                    Products.SerialNumber = reader.GetString(0);
+                    Products.Name = reader.GetString(1);
+            
+                }
+                reader.Close();
+            }
+
+            using (SqlCommand command = new SqlCommand())
+            {
+                command.Connection = conn;
+                command.CommandText = @"SELECT * from Stock WHERE SerialNumber =@SNum";
+                command.Parameters.AddWithValue("@SNum", id);
+                Console.WriteLine("@The SerialNumber " + id);
+                Stock = new StockModel();
+                SqlDataReader reader = command.ExecuteReader();
+                while (reader.Read())
+                {
+                    Stock.StockIdNumber = reader.GetInt32(0);
+                    Stock.Amount = reader.GetInt32(3);
+                }
+                reader.Close();
+            }
+            return Page();
+   
         }
+
+
 
         [BindProperty]
         public IFormFile imgUpload { get; set; }
@@ -56,8 +112,11 @@ namespace Group17_ProjectAssignment.Pages.Main_Pages.Admin_Pages
         }
 
 
-        public IActionResult OnPost()
+        public IActionResult OnPost(int? id)
+
         {
+
+
             var FileToUpload = Path.Combine(webEnv.WebRootPath, "Files", imgUpload.FileName);//this variable consists of file path
             Console.WriteLine("File Name : " + FileToUpload);
 
@@ -65,8 +124,29 @@ namespace Group17_ProjectAssignment.Pages.Main_Pages.Admin_Pages
             {
                 imgUpload.CopyTo(FStream);//copy the file into FStream variable
             }
+            UserName = HttpContext.Session.GetString(Session1);
 
-            return RedirectToPage("/index");
+
+            DBString dB = new DBString();
+            string ConnectionString = dB.ConString();
+            SqlConnection conn = new SqlConnection(ConnectionString);
+            conn.Open();
+            using (SqlCommand command = new SqlCommand())
+            {
+                command.Connection = conn;
+                command.CommandText = @"INSERT INTO ImgData (SerialNumber, FileName, Username) VALUES (@SNum,@Fnam,@Unam)";
+                command.Parameters.AddWithValue("@SNum", id);
+                command.Parameters.AddWithValue("@Fnam", UserName);
+                command.Parameters.AddWithValue("@Unam", imgUpload.FileName);
+                Console.WriteLine(Products);
+                Console.WriteLine(FileToUpload);
+                Console.WriteLine(UserName);
+                command.ExecuteNonQuery();
+            }
+
+
+
+                return RedirectToPage("/index");
         }
 
 

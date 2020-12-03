@@ -38,7 +38,7 @@ namespace Group17_ProjectAssignment.Pages.Main_Pages
                 }
 
                 SqlDataReader reader = command.ExecuteReader(); //SqlDataReader is used to read record from a table
-                command.CommandText = @"SELECT * FROM Products UNION SELECT * FROM Stock ";
+                command.CommandText = @"SELECT * FROM Products ";
 
                 Products = new List<ProductModel>(); //this object of list is created to populate all records from the table
 

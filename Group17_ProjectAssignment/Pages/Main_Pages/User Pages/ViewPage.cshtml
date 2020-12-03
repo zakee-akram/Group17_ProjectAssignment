@@ -65,23 +65,24 @@
         <td>@Model.Products[i].Company</td>
         <td>@Model.Products[i].SalePrice</td>
         <td>@Model.Products[i].Category</td>
-             
-            @if (!(String.IsNullOrEmpty(Model.Stock[i].SerialIdNumber) && Model.Stock[i].SerialIdNumber == Model.Products[i].SerialNumber))
-            {
-                <td>@Model.Stock[i].StockIdNumber</td>
-             //   <td>@Model.Stock[i].SerialIdNumber</td>
-                <td>@Model.Stock[i].PurchasePrice</td>
-                <td>@Model.Stock[i].Amount</td>
-            }     
-        
+
+        @if (!(String.IsNullOrEmpty(Model.Stock[i].SerialIdNumber) && Model.Stock[i].SerialIdNumber == Model.Products[i].SerialNumber))
+        {
+            <td>@Model.Stock[i].StockIdNumber</td>
+            //   <td>@Model.Stock[i].SerialIdNumber</td>
+            <td>@Model.Stock[i].PurchasePrice</td>
+            <td>@Model.Stock[i].Amount</td>
+        }
+
         }
         }
 
-        <td>
-            <a asp-page="/Main_Pages/Admin Pages/Product_Update" asp-route-id="@Model.Products[i].SerialNumber">Update</a>
-            <a asp-page="/Main_Pages/Admin Pages/Product_Delete" asp-route-id="@Model.Products[i].SerialNumber">Delete</a>
-            <a asp-page="/Main_Pages/Admin Pages/Adding_Stock" asp-route-id="@Model.Products[i].SerialNumber">Add</a>
-        </td>
+    <td>
+        <a asp-page="/Main_Pages/Admin Pages/Product_Update" asp-route-id="@Model.Products[i].SerialNumber">Update</a>
+        <a asp-page="/Main_Pages/Admin Pages/Product_Delete" asp-route-id="@Model.Products[i].SerialNumber">Delete</a>
+        <a asp-page="/Main_Pages/Admin Pages/ImageUpload" asp-route-id="@Model.Products[i].SerialNumber">AddImage</a>
+        <a asp-page="/Main_Pages/User Pages/ViewImage">ViewImage</a>
+    </td>
     </tr>
         }
 

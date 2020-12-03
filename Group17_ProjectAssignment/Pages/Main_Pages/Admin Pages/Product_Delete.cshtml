@@ -35,25 +35,34 @@
         @Model.Product.Category
     </div>
     <div>
-        <label asp-for="Product.Category"></label>
+        <label asp-for="Stock.StockIdNumber"></label>
         <span> : </span>
         @Model.Stock.StockIdNumber
     </div>
     <div>
-        <label asp-for="Product.Category"></label>
+        <label asp-for="Stock.PurchasePrice"></label>
         <span> : </span>
         @Model.Stock.PurchasePrice
     </div>
     <div>
-        <label asp-for="Product.Category"></label>
+        <label asp-for="Stock.Amount"></label>
         <span> : </span>
         @Model.Stock.Amount
     </div>
-</div>
 
+</div>
+<dt class="col-sm-2">
+    <img id="displayImg" src="~/Files/@Model.ImgDetails.FileName" alt="User Picture" style=" max-width:180px;" /><br>
+
+    Uploaded By : @Model.ImgDetails.User
+
+</dt>
 <br />
+
 <div>
     <form method="post">
+        <input type="hidden" asp-for="ImgDetails.FileName" /> 
+        <input type="hidden" asp-for="ImgDetails.User"/>
         <input type="hidden" asp-for="Product.SerialNumber" />
         <input type="submit" value="Delete" class="btn btn-danger" />
     </form>

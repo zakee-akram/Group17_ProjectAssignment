@@ -1,0 +1,29 @@
+﻿@page
+@model Group17_ProjectAssignment.Pages.Main_Pages.User_Pages.ViewImageModel
+@{
+}
+
+<h1>:: View Picture Page ::</h1>
+<br />
+<div class="col-md-10">
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Serial Number</th>
+                <th>Uploader</th>
+                <th>File</th>
+                <th>Action</th>
+            </tr>
+        </thead>
+
+        @for (int i = 0; i < Model.ImageRecord.Count; i++)
+        {
+            <tr>
+                <td>@Model.ImageRecord[i].SerialNumber</td>
+                <td>@Model.ImageRecord[i].User</td>
+                <td><img src="~/Files/@Model.ImageRecord[i].FileName" style=" max-width:80px;" /></td>
+                //<td><a asp-page="/DeleteFile/Delete" asp-route-id="@Model.ImageRecord[i].SerialNumber">Delete</a></td>
+            </tr>
+        }
+    </table>
+</div>
