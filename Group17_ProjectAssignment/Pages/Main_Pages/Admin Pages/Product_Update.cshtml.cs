@@ -14,10 +14,11 @@ namespace Group17_ProjectAssignment.Pages.Main_Pages
     {
         [BindProperty]
         public ProductModel Product { get; set; }
+        [BindProperty]
+        public StockModel Stock { get; set; }
 
         public string UserName;
         public const string Session1 = "username";
-
 
         public string FirstName;
         public const string Session2 = "fname";
@@ -28,8 +29,8 @@ namespace Group17_ProjectAssignment.Pages.Main_Pages
 
         public string Role;
         public const string Session4 = "Role";
-  
-        
+
+
 
         public IActionResult OnGet(int? id)
         {
@@ -44,7 +45,7 @@ namespace Group17_ProjectAssignment.Pages.Main_Pages
 
                 return RedirectToPage("/Main_Pages/User Pages/Login");
             }
-            return Page();
+         
 
             DBString dB = new DBString();
             string ConnectionString = dB.ConString();
@@ -53,7 +54,7 @@ namespace Group17_ProjectAssignment.Pages.Main_Pages
 
 
             Product = new ProductModel();
-
+            Stock = new StockModel();
             using (SqlCommand command = new SqlCommand())
             {
                 command.Connection = conn;
@@ -71,14 +72,28 @@ namespace Group17_ProjectAssignment.Pages.Main_Pages
                     Product.Company = reader.GetString(2); //getting the third field from the table
                     Product.SalePrice = reader.GetString(3);
                     Product.Category = reader.GetString(4);
-
                 }
-
-
+                reader.Close();
             }
 
-            conn.Close();
+            using (SqlCommand command = new SqlCommand())
+            {
+                command.Connection = conn;
+                command.CommandText = "SELECT * FROM Stock WHERE SerialNumber = @SNum";
+                command.Parameters.AddWithValue("@SNum", id);
+                Console.WriteLine("@The SerialNumber " + id);
 
+                SqlDataReader readerr = command.ExecuteReader();
+
+                while (readerr.Read())
+                {
+                    Stock.StockIdNumber = readerr.GetInt32(0); //getting the first field from the table
+                    Stock.SerialIdNumber = readerr.GetString(1); //getting the second field from the table
+                    Stock.PurchasePrice = readerr.GetInt32(2); //getting the third field from the table
+                    Stock.Amount = readerr.GetInt32(3);
+                }
+            }
+            conn.Close();
             return Page();
 
         }
@@ -86,7 +101,6 @@ namespace Group17_ProjectAssignment.Pages.Main_Pages
         {
             DBString dB = new DBString();
             string ConnectionString = dB.ConString();
-            //string ConnectionString = @"Data Source=(localdb)\MSSQLLocalDB;Initial Catalog=ComputerShop;Integrated Security=True;Connect Timeout=30;Encrypt=False;TrustServerCertificate=False;ApplicationIntent=ReadWrite;MultiSubnetFailover=False";
 
             SqlConnection conn = new SqlConnection(ConnectionString);
             conn.Open();
@@ -96,8 +110,9 @@ namespace Group17_ProjectAssignment.Pages.Main_Pages
             Console.WriteLine("Product Company : " + Product.Company);
             Console.WriteLine("Product SalePrice : " + Product.SalePrice);
             Console.WriteLine("Product Category : " + Product.Category);
-
-
+            Console.WriteLine("Stock Id Number :" + Stock.StockIdNumber);
+            Console.WriteLine("Purchase Price :" + Stock.PurchasePrice);
+            Console.WriteLine("Amount :" + Stock.Amount);
             using (SqlCommand command = new SqlCommand())
             {
                 command.Connection = conn;
@@ -111,14 +126,25 @@ namespace Group17_ProjectAssignment.Pages.Main_Pages
 
                 command.ExecuteNonQuery();
             }
+            using (SqlCommand command = new SqlCommand())
+            {
+                command.Connection = conn;
+                command.CommandText = "UPDATE Stock SET PurchasePrice = @Pri, Amount = @Amn, StockIdNumber = @Sin WHERE SerialNumber = @Snum";
+                command.Parameters.AddWithValue("@Pri", Stock.PurchasePrice);
+                command.Parameters.AddWithValue("@Amn", Stock.Amount);
+                command.Parameters.AddWithValue("@Sin", Stock.StockIdNumber);
+                command.Parameters.AddWithValue("@Snum", Product.SerialNumber);
+                command.ExecuteNonQuery();
+                conn.Close();
 
-            conn.Close();
-
+            }
             return RedirectToPage("/Index");
+
+
+
+
         }
-
-
-
-       
+ 
+        }
     }
-}
+

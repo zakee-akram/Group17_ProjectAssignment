@@ -11,6 +11,7 @@ namespace Group17_ProjectAssignment.Model
         //For Table Registration
         [Required]
         [Display(Name = "SerialNumber")]
+       [RegularExpression(@"^[0-9]*$")]
         public string SerialNumber { get; set; }
         [Required]
         [Display(Name = "Name")]
@@ -20,6 +21,7 @@ namespace Group17_ProjectAssignment.Model
         public string Company { get; set; }
         [Required]
         [Display(Name = "SalePrice")]
+        [RegularExpression(@"^[0-9]*$")]
         public string SalePrice { get; set; }
         [Required]
         [Display(Name = "Category")]

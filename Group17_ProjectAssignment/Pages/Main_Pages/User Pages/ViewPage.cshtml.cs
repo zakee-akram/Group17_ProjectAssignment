@@ -30,7 +30,7 @@ namespace Group17_ProjectAssignment.Pages.Main_Pages
             using (SqlCommand command = new SqlCommand())
             {
                 command.Connection = conn;
-                command.CommandText = @"SELECT * From Products ";
+                command.CommandText = @"SELECT * From Products ORDER BY SerialNumber";
                 if (!string.IsNullOrEmpty(Category))
                 {
                     command.CommandText += " WHERE Category = @Cat";
@@ -62,7 +62,7 @@ namespace Group17_ProjectAssignment.Pages.Main_Pages
             using (SqlCommand command = new SqlCommand())
             {
                 command.Connection = conn;
-                command.CommandText = @"SELECT * from Stock ";
+                command.CommandText = @"SELECT * from Stock ORDER BY SerialNumber ";
 
 
                 SqlDataReader reader = command.ExecuteReader(); //SqlDataReader is used to read record from a table

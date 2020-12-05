@@ -118,18 +118,16 @@ namespace Group17_ProjectAssignment.Pages.Main_Pages
 
             }
 
-
-
-
-
-
             return Page();
         }
 
 
         public IActionResult OnPost()
         {
-            deletePicture(ImgDetails.User, ImgDetails.FileName);
+            if (!string.IsNullOrEmpty(ImgDetails.FileName) && !string.IsNullOrEmpty(ImgDetails.User))
+            {
+                deletePicture(ImgDetails.User, ImgDetails.FileName);
+            }
             DBString dB = new DBString();
             string ConnectionString = dB.ConString();
             SqlConnection conn = new SqlConnection(ConnectionString);

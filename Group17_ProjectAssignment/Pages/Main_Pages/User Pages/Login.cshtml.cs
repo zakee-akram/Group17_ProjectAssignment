@@ -19,7 +19,12 @@ namespace Group17_ProjectAssignment.Pages.Main_Pages
      
      
     public IActionResult OnPost()
-        {    
+        {
+            
+            if (string.IsNullOrEmpty(user.UserName) | string.IsNullOrEmpty(user.Password))
+            {
+                return Page();
+            }
             DBString dB = new DBString();
             string ConnectionString = dB.ConString();
             SqlConnection conn = new SqlConnection(ConnectionString);

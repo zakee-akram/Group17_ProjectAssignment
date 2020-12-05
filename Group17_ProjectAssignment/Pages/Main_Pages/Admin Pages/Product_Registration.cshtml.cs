@@ -37,6 +37,7 @@ namespace Group17_ProjectAssignment.Pages.Main_Pages
 
         public IActionResult OnGet()
         {
+
             UserName = HttpContext.Session.GetString(Session1);
             FirstName = HttpContext.Session.GetString(Session2);
             sessionId = HttpContext.Session.GetString(Session3);
@@ -53,7 +54,11 @@ namespace Group17_ProjectAssignment.Pages.Main_Pages
 
         public IActionResult OnPost()
         {
-          
+
+            if (!ModelState.IsValid)
+            {
+                return Page();
+            }
 
             DBString dB = new DBString();
             string ConnectionString = dB.ConString();

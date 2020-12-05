@@ -7,9 +7,10 @@
 <div class="row">
     <div class="col-md-4">
         <form method="post">
-            <input type="hidden" asp-for="Product.SerialNumber" />
+           <input type="hidden" asp-for="Product.SerialNumber" />
+           <input type="hidden" asp-for="Stock.StockIdNumber" />
             <div class="form-group">
-                <label asp-for="Product.SerialNumber" class="control-label"></label>
+                <label asp-for="Product.SerialNumber"  class="control-label"></label>
                 <input type="text" asp-for="Product.SerialNumber" class="form-control" />
             </div>
             <div class="form-group">
@@ -43,6 +44,17 @@
                         <label class="control-label" for="Ram">Ram </label>
                         <input type="radio" id="Ram" value="Ram" asp-for="Product.Category" class="form-control" />                        
                     </div>
+            </div>
+            <div class="form-group">
+                <label asp-for="Stock.StockIdNumber" class="control-label"></label>
+                <input type="text" asp-for="Stock.StockIdNumber" class="form-control" />
+            </div>  
+            <div class="form-group">
+                <label asp-for="Stock.PurchasePrice" class="control-label"></label>
+                <input type="text" asp-for="Stock.PurchasePrice" class="form-control" />
+            </div><div class="form-group">
+                <label asp-for="Stock.Amount" class="control-label"></label>
+                <input type="text" asp-for="Stock.Amount" class="form-control" />
             </div>
             <div>
                 <input type="submit" value="Update" class="btn btn-secondary" />
