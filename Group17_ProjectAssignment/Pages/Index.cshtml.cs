@@ -130,10 +130,7 @@ namespace Group17_ProjectAssignment.Pages
                     AvgPurchasePrice =(double)command.ExecuteScalar();
                     AvgProfit =  AvgSalePrice - AvgPurchasePrice ;
                 }
-
-
             }
-
     }
     }
 

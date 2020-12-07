@@ -17,8 +17,10 @@ namespace Group17_ProjectAssignment.Pages.Main_Pages
 
         [BindProperty(SupportsGet = true)]
         public string Category { get; set; }
+        [BindProperty(SupportsGet = true)]
+        public string pricef { get; set; }
         public List<string> Categories { get; set; } = new List<string> { "GraphicsCard", "Cpu", "PowerSupply", "Motherboard", "Ram" };
-
+        public List<string> pricefilter { get; set; } = new List<string> {"50","100","250","500","100" }; 
 
         public void OnGet()
         {
@@ -30,7 +32,7 @@ namespace Group17_ProjectAssignment.Pages.Main_Pages
             using (SqlCommand command = new SqlCommand())
             {
                 command.Connection = conn;
-                command.CommandText = @"SELECT * From Products ORDER BY SerialNumber";
+                command.CommandText = @"SELECT * From Products";
                 if (!string.IsNullOrEmpty(Category))
                 {
                     command.CommandText += " WHERE Category = @Cat";
@@ -44,10 +46,10 @@ namespace Group17_ProjectAssignment.Pages.Main_Pages
 
                 while (reader.Read())
                 {
-                    ProductModel record = new ProductModel(); //a local var to hold a record temporarily
-                    record.SerialNumber = reader.GetString(0); //getting the first field from the table
-                    record.Name = reader.GetString(1); //getting the second field from the table
-                    record.Company = reader.GetString(2); //getting the third field from the table
+                    ProductModel record = new ProductModel();
+                    record.SerialNumber = reader.GetString(0); 
+                    record.Name = reader.GetString(1); 
+                    record.Company = reader.GetString(2); 
                     record.SalePrice = reader.GetString(3);
                     record.Category = reader.GetString(4);
 
@@ -56,6 +58,34 @@ namespace Group17_ProjectAssignment.Pages.Main_Pages
                 reader.Close();
             }
 
+            using (SqlCommand command = new SqlCommand())
+            {
+                command.Connection = conn;
+                command.CommandText = @"SELECT * From Products";
+                if (!string.IsNullOrEmpty(pricef))
+                {
+                    command.CommandText += " WHERE SalePrice BETWEEN 0 AND " + pricef;
+                    command.Parameters.AddWithValue("@SPri", Convert.ToString(pricef));
+                }
+
+                SqlDataReader reader = command.ExecuteReader(); //SqlDataReader is used to read record from a table
+                command.CommandText = @"SELECT * FROM Products ";
+
+                Products = new List<ProductModel>(); //this object of list is created to populate all records from the table
+
+                while (reader.Read())
+                {
+                    ProductModel record = new ProductModel();
+                    record.SerialNumber = reader.GetString(0);
+                    record.Name = reader.GetString(1);
+                    record.Company = reader.GetString(2);
+                    record.SalePrice = reader.GetString(3);
+                    record.Category = reader.GetString(4);
+
+                    Products.Add(record); //adding the single record into the list
+                }
+                reader.Close();
+            }
 
             SqlConnection connn = new SqlConnection(ConnectionString);
             connn.Open();

@@ -6,6 +6,13 @@
 <div>
     <p>Select Category</p>
     <form>
+        <select type="text" asp-for="pricef" style="width: 50%;">
+            <option>All</option>
+            @foreach (var item in Model.pricefilter)
+            {
+                <option>@item</option>
+            }
+        </select>
         <select type="text" asp-for="Category" style="width: 50%;">
             <option>All</option>
             @foreach (var item in Model.Categories)
@@ -15,6 +22,7 @@
         </select>
         <input type="submit" value="Filter" />
     </form>
+    <p>Select Price Filter</p>
 
 </div>
 <br />
@@ -89,38 +97,3 @@
     </table>
 </div>
 
-
-@*@for (int x = 0; i < Model.Stock.Count; i++)
-    {
-        <td>@Model.Stock[x].StockIdNumber</td>
-        <td>@Model.Stock[x].SerialIdNumber</td>
-        <td>@Model.Stock[x].PurchasePrice</td>
-        <td>@Model.Stock[x].Amount</td>
-    }*@
-
-
-@*@for (int i = 0; i < Model.Products.Count; i++)
-{
-    <tr>
-        <td>@Model.Products[i].SerialNumber</td>
-        <td>@Model.Products[i].Name</td>
-        <td>@Model.Products[i].Company</td>
-        <td>@Model.Products[i].SalePrice</td>
-        <td>@Model.Products[i].Category</td>
-        @for (int x = 0; x < Model.Stock.Count; i++)
-        {
-                           @if (!string.IsNullOrEmpty(Model.Stock[x].StockIdNumber.ToString()&&){
-
-        }
-               
-                    
-            
-              
-
-        <td>
-            <a asp-page="/Main_Pages/Admin Pages/Product_Update" asp-route-id="@Model.Products[i].SerialNumber">Update</a>
-            <a asp-page="/Main_Pages/Admin Pages/Product_Delete" asp-route-id="@Model.Products[i].SerialNumber">Delete</a>
-            <a asp-page="/Main_Pages/Admin Pages/Adding_Stock" asp-route-id="@Model.Products[i].SerialNumber">Add</a>
-        </t*@<!--d>-->
-    @*</tr>
-}*@
