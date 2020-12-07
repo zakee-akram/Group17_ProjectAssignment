@@ -15,6 +15,7 @@ namespace Group17_ProjectAssignment.Pages
     {
         public List<ProductModel> Products;
         public List<StockModel> Stock;
+        public List<ProductModel> TopProduct;
         private readonly ILogger<IndexModel> _logger;
 
         public IndexModel(ILogger<IndexModel> logger)
@@ -79,6 +80,30 @@ namespace Group17_ProjectAssignment.Pages
                     record.Amount = reader.GetInt32(3);
 
                     Stock.Add(record); //adding the single record into the list
+                }
+
+                // Call Close when done reading.
+                reader.Close();
+
+            }
+
+          //  connn.close();
+            using (SqlCommand command = new SqlCommand())
+            {
+                command.Connection = conn;
+                command.CommandText = @"SELECT * from Products ORDER By SalePrice ";
+
+
+                SqlDataReader reader = command.ExecuteReader(); //SqlDataReader is used to read record from a table
+
+                TopProduct = new List<ProductModel>(); //this object of list is created to populate all records from the table
+
+                while (reader.Read())
+                {
+                    ProductModel record = new ProductModel(); //a local var to hold a record temporarily
+                    record.SerialNumber = reader.GetString(0); //getting the first field from the table
+                    record.SalePrice = reader.GetString(3); //getting the third field from the table
+                    TopProduct.Add(record); //adding the single record into the list
                 }
 
                 // Call Close when done reading.

@@ -121,7 +121,7 @@ namespace Group17_ProjectAssignment.Pages.Main_Pages
             return Page();
         }
 
-
+        
         public IActionResult OnPost()
         {
             if (!string.IsNullOrEmpty(ImgDetails.FileName) && !string.IsNullOrEmpty(ImgDetails.User))
@@ -157,7 +157,7 @@ namespace Group17_ProjectAssignment.Pages.Main_Pages
             using (SqlCommand command = new SqlCommand())
             {
                 command.Connection = conn;
-                command.CommandText = @"DELETE FROM ImgData WHERE Username = @Id";
+                command.CommandText = "DELETE FROM ImgData WHERE Username = @Id";
                 command.Parameters.AddWithValue("@Id", userr);
                 command.ExecuteNonQuery();
             }

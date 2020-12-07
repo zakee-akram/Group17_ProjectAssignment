@@ -143,9 +143,6 @@ namespace Group17_ProjectAssignment.Pages.Main_Pages.Admin_Pages
                 Console.WriteLine(UserName);
                 command.ExecuteNonQuery();
             }
-
-
-
                 return RedirectToPage("/index");
         }
 
