@@ -5,3 +5,5 @@ Need to add:
 Better Sorting 
 Main menu stuff
 ~~Update page needs extra parameters~~
+Javascript
+css
