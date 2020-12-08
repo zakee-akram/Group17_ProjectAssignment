@@ -1,11 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
-using System.Linq;
-using System.Threading.Tasks;
+﻿using System.ComponentModel.DataAnnotations;
 
 namespace Group17_ProjectAssignment.Model
 {
+    //For users allows user to create a new account. 
     public class UsersModel
     {
         [Required]
@@ -18,7 +15,7 @@ namespace Group17_ProjectAssignment.Model
         [Required]
         [Display(Name = "SecondName")]
         public string SecondName { get; set; }
-        
+
         [Required]
         [Display(Name = "Password")]
         public string Password { get; set; }

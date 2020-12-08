@@ -1,11 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
-using System.Linq;
-using System.Threading.Tasks;
+﻿using System.ComponentModel.DataAnnotations;
 
 namespace Group17_ProjectAssignment.Model
 {
+    // Model for image data. 4 parameters.
     public class ImageModel
     {
         [Required]

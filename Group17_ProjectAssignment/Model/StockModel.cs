@@ -1,11 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
-using System.Linq;
-using System.Threading.Tasks;
+﻿using System.ComponentModel.DataAnnotations;
 
 namespace Group17_ProjectAssignment.Model
 {
+    //For Stock Managment.
     public class StockModel
     { //For Table Stock
         [Required]
@@ -13,7 +10,7 @@ namespace Group17_ProjectAssignment.Model
         [RegularExpression(@"^[0-9]*$")]
         public int StockIdNumber { get; set; }
         //[Display(Name = "SerialIdNumber")]
-//[RegularExpression(@"^[0-9]*$")]
+        //[RegularExpression(@"^[0-9]*$")]
         public string SerialIdNumber { get; set; }
         [Required]
         [Display(Name = "PurchasePrice")]

@@ -1,10 +1,7 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+using Group17_ProjectAssignment.Model;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
-using Group17_ProjectAssignment.Model;
+using System;
 using System.Data.SqlClient;
 
 namespace Group17_ProjectAssignment.Pages.Main_Pages
@@ -47,5 +44,5 @@ namespace Group17_ProjectAssignment.Pages.Main_Pages
             return RedirectToPage("/Index");
         }
     }
-        
+
 }

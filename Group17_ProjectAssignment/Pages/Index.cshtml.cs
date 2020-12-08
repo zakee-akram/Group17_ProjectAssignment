@@ -1,14 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Mvc;
+﻿using Group17_ProjectAssignment.Model;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.Extensions.Logging;
-using Group17_ProjectAssignment.Model;
+using System;
+using System.Collections.Generic;
 using System.Data.SqlClient;
-
-
 namespace Group17_ProjectAssignment.Pages
 {
     public class IndexModel : PageModel
@@ -27,9 +22,6 @@ namespace Group17_ProjectAssignment.Pages
         public double AvgPurchasePrice;
         public double AvgProfit;
         public string highest;
-       // public int AmtProduct;
-        //public double AvgSalePrice;
-       // public double AvgPurchasePrice;
         public void OnGet()
         {
             DBString dB = new DBString();
@@ -58,19 +50,14 @@ namespace Group17_ProjectAssignment.Pages
                 reader.Close();
             }
 
-
             SqlConnection connn = new SqlConnection(ConnectionString);
             connn.Open();
             using (SqlCommand command = new SqlCommand())
             {
                 command.Connection = conn;
                 command.CommandText = @"SELECT * from Stock ";
-
-
                 SqlDataReader reader = command.ExecuteReader(); //SqlDataReader is used to read record from a table
-
                 Stock = new List<StockModel>(); //this object of list is created to populate all records from the table
-
                 while (reader.Read())
                 {
                     StockModel record = new StockModel(); //a local var to hold a record temporarily
@@ -81,23 +68,15 @@ namespace Group17_ProjectAssignment.Pages
 
                     Stock.Add(record); //adding the single record into the list
                 }
-
                 // Call Close when done reading.
                 reader.Close();
-
             }
-
-          //  connn.close();
             using (SqlCommand command = new SqlCommand())
             {
                 command.Connection = conn;
                 command.CommandText = @"SELECT * from Products ORDER By SalePrice ";
-
-
                 SqlDataReader reader = command.ExecuteReader(); //SqlDataReader is used to read record from a table
-
                 TopProduct = new List<ProductModel>(); //this object of list is created to populate all records from the table
-
                 while (reader.Read())
                 {
                     ProductModel record = new ProductModel(); //a local var to hold a record temporarily
@@ -108,30 +87,27 @@ namespace Group17_ProjectAssignment.Pages
 
                 // Call Close when done reading.
                 reader.Close();
-
             }
 
-            /////amm times sale.
-            /////amd times purchase
-            /////minus each other
-            for (int i = 0; i<Stock.Count;i++) {
+            for (int i = 0; i < Stock.Count; i++)
+            {
                 ; //this object of list is created to populate all records from the table
                 using (SqlCommand command = new SqlCommand())
-            {
-                command.Connection = conn;            
-                command.Parameters.AddWithValue("@SNum", Stock[i].SerialIdNumber);
-                Console.WriteLine("@The SerialNumber " + Stock[i].SerialIdNumber);
+                {
+                    command.Connection = conn;
+                    command.Parameters.AddWithValue("@SNum", Stock[i].SerialIdNumber);
+                    Console.WriteLine("@The SerialNumber " + Stock[i].SerialIdNumber);
                     //SqlDataReader reader = command.ExecuteReader(); //SqlDataReader is used to read record from a table
                     command.CommandText = @"SELECT Count (Amount) from Stock";
                     AmtProduct = (Int32)command.ExecuteScalar();
                     command.CommandText = @"SELECT AVG(CAST(SalePrice as FLOAT)) from Products";
-                    AvgSalePrice= (double)command.ExecuteScalar();
+                    AvgSalePrice = (double)command.ExecuteScalar();
                     command.CommandText = @"SELECT AVG(CAST(PurchasePrice as FLOAT)) from Stock";
-                    AvgPurchasePrice =(double)command.ExecuteScalar();
-                    AvgProfit =  AvgSalePrice - AvgPurchasePrice ;
+                    AvgPurchasePrice = (double)command.ExecuteScalar();
+                    AvgProfit = AvgSalePrice - AvgPurchasePrice;
                 }
             }
-    }
+        }
     }
 
 }

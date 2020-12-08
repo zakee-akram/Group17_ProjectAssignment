@@ -1,13 +1,9 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+using Group17_ProjectAssignment.Model;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
-using Group17_ProjectAssignment.Model;
+using System;
 using System.Data.SqlClient;
-using Microsoft.AspNetCore.Http;
-
 namespace Group17_ProjectAssignment.Pages.Main_Pages
 {
     public class LoginModel : PageModel
@@ -16,11 +12,8 @@ namespace Group17_ProjectAssignment.Pages.Main_Pages
         public UsersModel user { get; set; }
         public string message { get; set; }
         public string sessionId { get; set; }
-     
-     
-    public IActionResult OnPost()
+        public IActionResult OnPost()
         {
-            
             if (string.IsNullOrEmpty(user.UserName) | string.IsNullOrEmpty(user.Password))
             {
                 return Page();
@@ -45,7 +38,6 @@ namespace Group17_ProjectAssignment.Pages.Main_Pages
                     user.Role = reader.GetString(2);
                 }
             }
-
             if (!string.IsNullOrEmpty(user.FirstName))
             {
                 sessionId = HttpContext.Session.Id;
@@ -62,16 +54,12 @@ namespace Group17_ProjectAssignment.Pages.Main_Pages
                 {
                     return RedirectToPage("/Main_Pages/Admin Pages/WelcomeAdmin");
                 }
-
-
             }
             else
             {
                 message = "Invalid Username and Password!";
                 return Page();
             }
-
-
         }
 
     }
