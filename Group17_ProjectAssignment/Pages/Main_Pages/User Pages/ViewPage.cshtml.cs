@@ -33,7 +33,7 @@ namespace Group17_ProjectAssignment.Pages.Main_Pages
                     command.Parameters.AddWithValue("@Cat", Convert.ToString(Category));
                 }
                 SqlDataReader reader = command.ExecuteReader(); //SqlDataReader is used to read record from a table
-                command.CommandText = @"SELECT * FROM Products ";
+                command.CommandText = @"SELECT * FROM Products AS Variables ";
                 Products = new List<ProductModel>(); //this object of list is created to populate all records from the table
                 while (reader.Read())
                 {
@@ -72,6 +72,25 @@ namespace Group17_ProjectAssignment.Pages.Main_Pages
                 }
                 reader.Close();
             }
+
+            //using (SqlCommand command = new SqlCommand())
+            //{
+            //    command.Connection = conn;
+            //    command.CommandText = @"SELECT SerialNumber, Company, SalePrice FROM Products UNION SELECT StockIdNumber, PurchasePrice, Amount FROM Stock ORDER By SerialNumber ";
+            //    SqlDataReader reader = command.ExecuteReader(); //SqlDataReader is used to read record from a table
+            //    Products = new List<ProductModel>(); //this object of list is created to populate all records from the table
+            //    while (reader.Read())
+            //    {
+            //        //ProductModel record = new ProductModel();
+            //        //record.SerialNumber = reader.GetInt32(0).ToString();
+            //        //record.Name = reader.GetInt32(1).ToString();
+            //        //record.Company = reader.GetString(2);
+            //        //record.SalePrice = reader.GetInt32(3).ToString();
+            //        //record.Category = reader.GetString(4);
+            //        //Products.Add(record); //adding the single record into the list
+            //    }
+            //    reader.Close();
+            //}
             SqlConnection connn = new SqlConnection(ConnectionString);
             connn.Open();
             using (SqlCommand command = new SqlCommand())

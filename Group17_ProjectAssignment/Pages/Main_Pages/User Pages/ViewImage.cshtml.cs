@@ -17,7 +17,7 @@ namespace Group17_ProjectAssignment.Pages.Main_Pages.User_Pages
             using (SqlCommand command = new SqlCommand())
             {
                 command.Connection = conn;
-                command.CommandText = @"SELECT * from ImgData ";
+                command.CommandText = @"SELECT * from ImgData  ";
                 SqlDataReader reader = command.ExecuteReader(); //SqlDataReader is used to read record from a table
                 ImageRecord = new List<ImageModel>(); //this object of list is created to populate all records from the table
                 while (reader.Read())

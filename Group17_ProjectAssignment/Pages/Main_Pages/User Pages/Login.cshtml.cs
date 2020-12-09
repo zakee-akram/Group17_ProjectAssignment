@@ -27,7 +27,7 @@ namespace Group17_ProjectAssignment.Pages.Main_Pages
             using (SqlCommand command = new SqlCommand())
             {
                 command.Connection = conn;
-                command.CommandText = @"SELECT UserName, FirstName, Role FROM UserTable WHERE UserName = @UNam AND Password = @Pass";
+                command.CommandText = @"SELECT UserName AS Uname, FirstName AS Fname, Role As AorE FROM UserTable WHERE UserName = @UNam AND Password = @Pass";
                 command.Parameters.AddWithValue("@UNam", user.UserName);
                 command.Parameters.AddWithValue("@Pass", user.Password);
                 var reader = command.ExecuteReader();

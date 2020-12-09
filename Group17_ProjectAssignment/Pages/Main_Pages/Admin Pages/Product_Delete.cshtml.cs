@@ -50,7 +50,7 @@ namespace Group17_ProjectAssignment.Pages.Main_Pages
             using (SqlCommand command = new SqlCommand())
             {
                 command.Connection = conn;
-                command.CommandText = "SELECT * FROM Products WHERE SerialNumber = @SNum";
+                command.CommandText = "SELECT * FROM Products WHERE SerialNumber = @SNum As id";
                 command.Parameters.AddWithValue("@SNum", id);
                 Console.WriteLine("@The SerialNumber " + id);
                 SqlDataReader reader = command.ExecuteReader();
@@ -105,7 +105,7 @@ namespace Group17_ProjectAssignment.Pages.Main_Pages
         {
             if (!string.IsNullOrEmpty(ImgDetails.FileName) && !string.IsNullOrEmpty(ImgDetails.User))
             {
-                deletePicture(ImgDetails.User, ImgDetails.FileName);
+                deletePicture(ImgDetails.User, ImgDetails.FileName, Product.SerialNumber);
             }
             DBString dB = new DBString();
             string ConnectionString = dB.ConString();
@@ -123,7 +123,7 @@ namespace Group17_ProjectAssignment.Pages.Main_Pages
             conn.Close();
             return RedirectToPage("/Index");
         }
-        public void deletePicture(string userr, string FileName)
+        public void deletePicture(string userr, string FileName, string serialnumber)
         {
             Console.WriteLine("Record Id : " + userr);
             Console.WriteLine("File Name : " + FileName);
@@ -134,8 +134,8 @@ namespace Group17_ProjectAssignment.Pages.Main_Pages
             using (SqlCommand command = new SqlCommand())
             {
                 command.Connection = conn;
-                command.CommandText = "DELETE FROM ImgData WHERE Username = @Id";
-                command.Parameters.AddWithValue("@Id", userr);
+                command.CommandText = "DELETE ImgData WHERE SerialNumber = @Id";
+                command.Parameters.AddWithValue("@Id", serialnumber);
                 command.ExecuteNonQuery();
             }
             conn.Close();
