@@ -1,0 +1,43 @@
+﻿@page
+@model Group17_ProjectAssignment.Pages.Main_Pages.User_Pages.ViewImageModel
+@{
+}
+
+<h1>:: View Picture Page ::</h1>
+<br />
+<div class="col-md-10">
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Serial Number</th>
+                <th>Uploader</th>
+                <th>File</th>
+            </tr>
+        </thead>
+
+        @for (int i = 0; i < Model.ImageRecord.Count; i++)
+        {
+            <tr>
+                <td>@Model.ImageRecord[i].SerialNumber</td>
+                <td>@Model.ImageRecord[i].User</td>
+                <td><img src="~/Files/@Model.ImageRecord[i].FileName" style=" max-width:80px;" /></td>
+            </tr>
+        }
+    </table>
+</div>
+
+
+
+@*<div class="slideshow">
+    @for (int i = 0; i < Model.ImageRecord.Count; i++)
+    {
+        <div class="slides">
+            <div class="number">@i / @Model.ImageRecord.Count </div>
+            <img src="~/Files/@Model.ImageRecord[i].FileName" />
+            <div class="text">@Model.ImageRecord[i].SerialNumber</div>
+            <div class="text">@Model.ImageRecord[i].User</div>
+        </div>
+    }
+    <a class="prev" onclick="add(-1)">&#10094;</a>
+    <a class="next" onclick="add(+1)">&#10095;</a>
+</div>*@

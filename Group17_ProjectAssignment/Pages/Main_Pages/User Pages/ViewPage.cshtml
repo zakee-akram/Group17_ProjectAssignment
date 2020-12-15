@@ -6,20 +6,26 @@
 <div>
     <p>Select Category</p>
     <form>
-        <select type="text" asp-for="Category" style="width: 50%;">
+        <select type="text" asp-for="pricef" style="width: 50%;">
             <option>All</option>
-            @foreach(var item in Model.Categories)
+            @foreach (var item in Model.pricefilter)
             {
                 <option>@item</option>
             }
         </select>
-        <input type="submit" value="Filter"/>
+        <select type="text" asp-for="Category" style="width: 50%;">
+            <option>All</option>
+            @foreach (var item in Model.Categories)
+            {
+                <option>@item</option>
+            }
+        </select>
+        <input type="submit" value="Filter" />
     </form>
+    <p>Select Price Filter</p>
 
 </div>
 <br />
-
-
 
 
 <div>
@@ -42,6 +48,15 @@
                     @Html.DisplayNameFor(model => model.Products[4].Category)
                 </th>
                 <th>
+                    @Html.DisplayNameFor(model => model.Stock[0].StockIdNumber)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Stock[1].PurchasePrice)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Stock[2].Amount)
+                </th>
+                <th>
                     Actions
                 </th>
 
@@ -59,12 +74,26 @@
         <td>@Model.Products[i].SalePrice</td>
         <td>@Model.Products[i].Category</td>
 
-        <td>
-            <a asp-page="/Main_Pages/Admin Pages/Product_Update" asp-route-id="@Model.Products[i].SerialNumber">Update</a>
-            <a asp-page="/Main_Pages/Admin Pages/Product_Delete" asp-route-id="@Model.Products[i].SerialNumber">Delete</a>
-        </td>
+        @if (!(String.IsNullOrEmpty(Model.Stock[i].SerialIdNumber) && Model.Stock[i].SerialIdNumber == Model.Products[i].SerialNumber))
+        {
+            <td>@Model.Stock[i].StockIdNumber</td>
+            //   <td>@Model.Stock[i].SerialIdNumber</td>
+            <td>@Model.Stock[i].PurchasePrice</td>
+            <td>@Model.Stock[i].Amount</td>
+        }
 
+        }
+        }
+
+    <td>
+        <a asp-page="/Main_Pages/Admin Pages/Product_Update" asp-route-id="@Model.Products[i].SerialNumber">Update</a>
+        <a asp-page="/Main_Pages/Admin Pages/Product_Delete" asp-route-id="@Model.Products[i].SerialNumber">Delete</a>
+        <a asp-page="/Main_Pages/Admin Pages/ImageUpload" asp-route-id="@Model.Products[i].SerialNumber">AddImage</a>
+        <a asp-page="/Main_Pages/User Pages/ViewImage">ViewImage</a>
+    </td>
     </tr>
         }
+
     </table>
 </div>
+

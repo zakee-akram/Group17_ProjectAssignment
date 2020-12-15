@@ -1,13 +1,9 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+using Group17_ProjectAssignment.Model;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
-using Group17_ProjectAssignment.Model;
+using System;
 using System.Data.SqlClient;
-using Microsoft.AspNetCore.Http;
-
 namespace Group17_ProjectAssignment.Pages.Main_Pages
 {
     public class LoginModel : PageModel
@@ -16,10 +12,12 @@ namespace Group17_ProjectAssignment.Pages.Main_Pages
         public UsersModel user { get; set; }
         public string message { get; set; }
         public string sessionId { get; set; }
-     
-     
-    public IActionResult OnPost()
-        {    
+        public IActionResult OnPost()
+        {
+            if (string.IsNullOrEmpty(user.UserName) | string.IsNullOrEmpty(user.Password))
+            {
+                return Page();
+            }
             DBString dB = new DBString();
             string ConnectionString = dB.ConString();
             SqlConnection conn = new SqlConnection(ConnectionString);
@@ -29,7 +27,7 @@ namespace Group17_ProjectAssignment.Pages.Main_Pages
             using (SqlCommand command = new SqlCommand())
             {
                 command.Connection = conn;
-                command.CommandText = @"SELECT UserName, FirstName, Role FROM UserTable WHERE UserName = @UNam AND Password = @Pass";
+                command.CommandText = @"SELECT UserName AS Uname, FirstName AS Fname, Role As AorE FROM UserTable WHERE UserName = @UNam AND Password = @Pass";
                 command.Parameters.AddWithValue("@UNam", user.UserName);
                 command.Parameters.AddWithValue("@Pass", user.Password);
                 var reader = command.ExecuteReader();
@@ -40,7 +38,6 @@ namespace Group17_ProjectAssignment.Pages.Main_Pages
                     user.Role = reader.GetString(2);
                 }
             }
-
             if (!string.IsNullOrEmpty(user.FirstName))
             {
                 sessionId = HttpContext.Session.Id;
@@ -49,7 +46,7 @@ namespace Group17_ProjectAssignment.Pages.Main_Pages
                 HttpContext.Session.SetString("fname", user.FirstName);
                 HttpContext.Session.SetString("Role", user.Role);
 
-                if (user.Role == "User")
+                if (user.Role == "Employee")
                 {
                     return RedirectToPage("/Main_Pages/User Pages/WelcomeUser");
                 }
@@ -57,16 +54,12 @@ namespace Group17_ProjectAssignment.Pages.Main_Pages
                 {
                     return RedirectToPage("/Main_Pages/Admin Pages/WelcomeAdmin");
                 }
-
-
             }
             else
             {
                 message = "Invalid Username and Password!";
                 return Page();
             }
-
-
         }
 
     }
