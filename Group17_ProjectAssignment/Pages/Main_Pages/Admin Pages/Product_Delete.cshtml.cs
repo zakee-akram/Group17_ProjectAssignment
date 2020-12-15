@@ -50,7 +50,7 @@ namespace Group17_ProjectAssignment.Pages.Main_Pages
             using (SqlCommand command = new SqlCommand())
             {
                 command.Connection = conn;
-                command.CommandText = "SELECT * FROM Products WHERE SerialNumber = @SNum As id";
+                command.CommandText = "SELECT * FROM Products WHERE SerialNumber = @SNum";
                 command.Parameters.AddWithValue("@SNum", id);
                 Console.WriteLine("@The SerialNumber " + id);
                 SqlDataReader reader = command.ExecuteReader();

@@ -33,7 +33,7 @@
 
 <div>
     <form method="post" enctype="multipart/form-data">
-
+        @* Calls js to display image preview once file inputted. *@
         <div>
             <label>Select an image file to upload</label>
             <input type="file" asp-for="imgUpload" onchange="readURL(this)" accept="image/*" />
