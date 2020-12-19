@@ -8,7 +8,7 @@ namespace Group17_ProjectAssignment.Pages.Main_Pages
     {
         public string UserName;
         public const string Session1 = "username";
-        public string FirstName;
+        public string FirstName; 
         public const string Session2 = "fname";
         public string sessionId;
         public const string Session3 = "sessionId";
