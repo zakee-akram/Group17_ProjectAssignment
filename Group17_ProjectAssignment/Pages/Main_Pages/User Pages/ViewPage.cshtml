@@ -6,13 +6,13 @@
 <div>
     <p>Select Category</p>
     <form>
-        <select type="text" asp-for="pricef" style="width: 50%;">
+        @*<select type="text" asp-for="pricef" style="width: 50%;">
             <option>All</option>
             @foreach (var item in Model.pricefilter)
             {
                 <option>@item</option>
             }
-        </select>
+        </select>*@
         <select type="text" asp-for="Category" style="width: 50%;">
             <option>All</option>
             @foreach (var item in Model.Categories)
@@ -22,7 +22,7 @@
         </select>
         <input type="submit" value="Filter" />
     </form>
-    <p>Select Price Filter</p>
+    @*<p>Select Price Filter</p>*@
 
 </div>
 <br />

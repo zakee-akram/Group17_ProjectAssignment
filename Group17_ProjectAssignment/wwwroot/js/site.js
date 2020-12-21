@@ -3,6 +3,7 @@
 
 // Write your Javascript code.
 
+//Preview Image
 
 function readURL(input) {
     var reader = new FileReader();

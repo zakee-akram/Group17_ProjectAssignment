@@ -16,7 +16,7 @@ namespace Group17_ProjectAssignment.Pages.Main_Pages
         [BindProperty(SupportsGet = true)]
         public string pricef { get; set; }
         public List<string> Categories { get; set; } = new List<string> { "GraphicsCard", "Cpu", "PowerSupply", "Motherboard", "Ram" };
-        public List<string> pricefilter { get; set; } = new List<string> { "50", "100", "250", "500", "100" };
+        //public List<string> pricefilter { get; set; } = new List<string> { "50", "100", "250", "500", "100" };
         public void OnGet()
         {
             DBString dB = new DBString();
@@ -27,13 +27,13 @@ namespace Group17_ProjectAssignment.Pages.Main_Pages
             {
                 command.Connection = conn;
                 command.CommandText = @"SELECT * From Products";
-                if (!string.IsNullOrEmpty(Category))
+                if (!string.IsNullOrEmpty(Category) && !string.Equals(Category, "All"))
                 {
                     command.CommandText += " WHERE Category = @Cat";
                     command.Parameters.AddWithValue("@Cat", Convert.ToString(Category));
                 }
                 SqlDataReader reader = command.ExecuteReader(); //SqlDataReader is used to read record from a table
-                command.CommandText = @"SELECT * FROM Products AS Variables ";
+               // command.CommandText = @"SELECT * FROM Products AS Variables ";
                 Products = new List<ProductModel>(); //this object of list is created to populate all records from the table
                 while (reader.Read())
                 {
@@ -48,30 +48,30 @@ namespace Group17_ProjectAssignment.Pages.Main_Pages
                 }
                 reader.Close();
             }
-            using (SqlCommand command = new SqlCommand())
-            {
-                command.Connection = conn;
-                command.CommandText = @"SELECT * From Products";
-                if (!string.IsNullOrEmpty(pricef))
-                {
-                    command.CommandText += " WHERE SalePrice BETWEEN 0 AND " + pricef;
-                    command.Parameters.AddWithValue("@SPri", Convert.ToString(pricef));
-                }
-                SqlDataReader reader = command.ExecuteReader(); //SqlDataReader is used to read record from a table
-                command.CommandText = @"SELECT * FROM Products ";
-                Products = new List<ProductModel>(); //this object of list is created to populate all records from the table
-                while (reader.Read())
-                {
-                    ProductModel record = new ProductModel();
-                    record.SerialNumber = reader.GetString(0);
-                    record.Name = reader.GetString(1);
-                    record.Company = reader.GetString(2);
-                    record.SalePrice = reader.GetString(3);
-                    record.Category = reader.GetString(4);
-                    Products.Add(record); //adding the single record into the list
-                }
-                reader.Close();
-            }
+            //using (SqlCommand command = new SqlCommand())
+            //{
+            //    command.Connection = conn;
+            //    command.CommandText = @"SELECT * From Products";
+            //    if (!string.IsNullOrEmpty(pricef) && !string.Equals(pricef,"All"))
+            //    {
+            //        command.CommandText += " WHERE SalePrice BETWEEN 0 AND " + pricef;
+            //        command.Parameters.AddWithValue("@SPri", Convert.ToString(pricef));
+            //    }
+            //    SqlDataReader reader = command.ExecuteReader(); //SqlDataReader is used to read record from a table
+            //    command.CommandText = @"SELECT * FROM Products ";
+            //    Products = new List<ProductModel>(); //this object of list is created to populate all records from the table
+            //    while (reader.Read())
+            //    {
+            //        ProductModel record = new ProductModel();
+            //        record.SerialNumber = reader.GetString(0);
+            //        record.Name = reader.GetString(1);
+            //        record.Company = reader.GetString(2);
+            //        record.SalePrice = reader.GetString(3);
+            //        record.Category = reader.GetString(4);
+            //        Products.Add(record); //adding the single record into the list
+            //    }
+            //    reader.Close();
+            //}
 
             //using (SqlCommand command = new SqlCommand())
             //{
